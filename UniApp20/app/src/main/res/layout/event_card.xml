@@ -1,0 +1,40 @@
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="@dimen/card_margin"
+    android:elevation="3dp"
+    card_view:cardCornerRadius="@dimen/card_news_radius">
+<RelativeLayout
+    android:layout_margin="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/event_headline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/event_headline"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/event_location"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color"
+        android:textSize="18sp" />
+
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

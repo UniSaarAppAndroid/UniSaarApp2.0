@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SBActivities.MainActivity">
+
+    <item
+        android:id="@+id/action_favorite"
+        android:orderInCategory="300"
+        android:title="User"
+        android:icon="@drawable/ic_settings_black_24dp"
+        app:showAsAction="ifRoom"></item>
+
+    <item android:id="@+id/activity_search"
+        android:title="Search"
+        android:visible="false"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.widget.SearchView"
+        />
+    <item
+        android:id="@+id/action_events"
+        android:title="User"
+        android:visible="false"
+        android:icon="@drawable/ic_event_black_24dp"
+        app:showAsAction="ifRoom"></item>
+    <item
+        android:visible="false"
+        android:id="@+id/action_back"
+        android:orderInCategory="100"
+        android:title="Done"
+        app:showAsAction="ifRoom"></item>
+</menu>

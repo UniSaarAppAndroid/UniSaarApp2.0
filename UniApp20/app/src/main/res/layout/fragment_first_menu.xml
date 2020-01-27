@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.FirstMenuFragment">
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/mensa_swiperefresh_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/viewBg"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:id="@+id/mensa_first_date"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:background="@color/text_color"
+                android:text="Monday \n January 27, 2020"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/mensa_first_date"
+            android:layout_marginTop="10dp"
+            android:id="@+id/mensa_first_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</FrameLayout>

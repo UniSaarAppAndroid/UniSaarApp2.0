@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_news_feed"
+        android:icon="@drawable/ic_event_note_black_24dp"
+        android:title="@string/title_news_feed" />
+
+    <item
+        android:id="@+id/navigation_mensa"
+        android:icon="@drawable/ic_local_cafe_black_24dp"
+        android:title="@string/title_mensa" />
+
+    <item
+        android:id="@+id/navigation_map"
+        android:icon="@drawable/ic_map_black_24dp"
+        android:title="@string/title_map" />
+
+    <item
+        android:id="@+id/navigation_directory"
+        android:icon="@drawable/ic_person_black_24dp"
+        android:title="@string/title_directory" />
+    <item
+        android:id="@+id/navigation_more"
+        android:icon="@drawable/ic_more_horiz_black_24dp"
+        android:title="@string/title_more" />
+</menu>

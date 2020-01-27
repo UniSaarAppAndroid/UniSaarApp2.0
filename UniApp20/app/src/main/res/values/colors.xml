@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#174774</color>
+    <color name="colorPrimaryDark">#47525E</color>
+    <color name="colorAccent">#3EA6FF</color>
+    <color name="viewBg">#f1f5f8</color>
+    <color name="news_headline">#FF4C4F53</color>
+    <color name="bg_bottom_navigation">#4c4c4c</color>
+    <color name="text_color">#FF939CA5</color>
+    <color name="card_name_color">#3FA7FF</color>
+    <color name="mensa_menu_color">#FFC20306</color>
+</resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DirectoryFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_directory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search Public Directory:"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/et_directory"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="5dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/directory_edittext_border"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:hint="Search"
+            android:textColor="@color/text_color"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:paddingStart="10dp" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/text_color"
+            android:id="@+id/tv_directory_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tip: A basic search requires only three characters of a person's name, email address or phone number."
+            android:textSize="14sp"/>
+        <LinearLayout
+            android:id="@+id/ll_helpfullnumbers"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_weight="100"
+                android:id="@+id/tv_directory_favourites_heading"
+                android:layout_width="0dp"
+                android:textColor="@color/colorAccent"
+                android:layout_height="wrap_content"
+                android:text="Helpfull Numbers: "
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+
+        </LinearLayout>
+
+        <ListView
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:id="@+id/lv_directory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </LinearLayout>
+</FrameLayout>
