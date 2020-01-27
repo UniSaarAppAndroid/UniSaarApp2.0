@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -50,7 +49,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
@@ -91,7 +89,6 @@ public class MapFragment extends Fragment {
         setHasOptionsMenu(true);
         SessionManager.getInstance(getContext()).setScreen("MapFragment");
 
-
         final String[] from = new String[]{"buildingName"};
         final int[] to = new int[]{android.R.id.text1};
 
@@ -106,11 +103,8 @@ public class MapFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-
         menu.findItem(R.id.action_events).setVisible(false);
         menu.findItem(R.id.activity_search).setVisible(true);
-
         SearchView searchView = (SearchView) menu.findItem(R.id.activity_search).getActionView();
 
         if (SessionManager.getInstance(getContext()).isSB()) {
@@ -121,6 +115,11 @@ public class MapFragment extends Fragment {
 
         searchView.setSuggestionsAdapter(mAdapter);
 
+
+
+
+
+
         searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionClick(int position) {
@@ -128,13 +127,13 @@ public class MapFragment extends Fragment {
 
                 Cursor cursor = (Cursor) mAdapter.getItem(position);
                 String txt = cursor.getString(cursor.getColumnIndex("buildingName"));
-                String[] s = txt.split("\\s+");
+                String s[] = txt.split("\\s+");
                 String key = s[0];
 
                 if (SessionManager.getInstance(getContext()).isSB()) {
-                    changeCameraPosition(Objects.requireNonNull(locationsSb.get(key)));
+                    changeCameraPosition(locationsSb.get(key));
                 } else {
-                    changeCameraPosition(Objects.requireNonNull(locationsHom.get(key)));
+                    changeCameraPosition(locationsHom.get(key));
                 }
                 searchView.setQuery(txt, true);
 
@@ -159,11 +158,13 @@ public class MapFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 //              if (searchView.isExpanded() && TextUtils.isEmpty(newText)) {
-                Log.d("Text has changed",newText);
                 populateAdapter(newText);
                 return true;
             }
 
+            public void callSearch(String query) {
+                //Do searching
+            }
         });
 
 
@@ -184,15 +185,13 @@ public class MapFragment extends Fragment {
             float latInt = Float.parseFloat(lat);
             float lonInt = Float.parseFloat(lon);
 
-            InputMethodManager inputManager = (InputMethodManager) Objects.requireNonNull(getActivity())
+            InputMethodManager inputManager = (InputMethodManager) getActivity()
                     .getSystemService(Context.INPUT_METHOD_SERVICE);
 
             // check if no view has focus:
             View currentFocusedView = getActivity().getCurrentFocus();
             if (currentFocusedView != null) {
-                if (inputManager != null) {
-                    inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }
+                inputManager.hideSoftInputFromWindow(currentFocusedView.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
 
 
@@ -208,7 +207,7 @@ public class MapFragment extends Fragment {
                     .build()
             ));
 
-        } catch (JSONException ignored) {
+        } catch (JSONException e) {
 
         }
 
@@ -220,7 +219,7 @@ public class MapFragment extends Fragment {
         final MatrixCursor c = new MatrixCursor(new String[]{BaseColumns._ID, "buildingName"});
         int i = 0;
 
-        HashMap<String, JSONObject> locations;
+        HashMap<String, JSONObject> locations = new HashMap<>();
 
         if (SessionManager.getInstance(getContext()).isSB()) {
             locations = locationsSb;
@@ -255,7 +254,7 @@ public class MapFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.map_content, container, false);
-        Objects.requireNonNull(getActivity()).setTitle("Map");
+        getActivity().setTitle("Map");
 
         mMapView = view.findViewById(R.id.mapView);
         mMapView.onCreate(savedInstanceState);
@@ -370,7 +369,7 @@ public class MapFragment extends Fragment {
 
 
     public boolean checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()),
+        if (ContextCompat.checkSelfPermission(getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
@@ -384,10 +383,13 @@ public class MapFragment extends Fragment {
                 new AlertDialog.Builder(getActivity())
                         .setTitle("")
                         .setMessage("")
-                        .setPositiveButton("Ok", (dialogInterface, i) -> {
-                            //Prompt the user once explanation has been shown
-                            ActivityCompat.requestPermissions(getActivity(), new String[]
-                                    {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //Prompt the user once explanation has been shown
+                                ActivityCompat.requestPermissions(getActivity(), new String[]
+                                        {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                            }
                         })
                         .create()
                         .show();
@@ -407,27 +409,37 @@ public class MapFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() != R.id.action_favorite) {
-            return false;
-        }// Do onlick on menu action here
-        startActivity(new Intent(getActivity(), MapFilterActivity.class));
-        Objects.requireNonNull(getActivity()).finish();
-        return true;
+        switch (item.getItemId()) {
+
+            case R.id.action_favorite:
+                // Do onlick on menu action here
+                startActivity(new Intent(getActivity(), MapFilterActivity.class));
+                getActivity().finish();
+                return true;
+        }
+        return false;
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == 1) {
-            if (grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        switch (requestCode) {
+            case 1: {
 
-                if (ContextCompat.checkSelfPermission(getActivity(),
-                        Manifest.permission.ACCESS_FINE_LOCATION)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    googleMap.setMyLocationEnabled(true);
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    if (ContextCompat.checkSelfPermission(getActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+
+                        googleMap.setMyLocationEnabled(true);
+                    }
+
                 }
-
+                return;
             }
+
         }
     }
 

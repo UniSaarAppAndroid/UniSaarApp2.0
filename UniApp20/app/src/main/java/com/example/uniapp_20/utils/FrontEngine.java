@@ -24,7 +24,7 @@ public class FrontEngine {
 
     public String tag_json_obj = "json_obj_req";
 
-    public String base_url = "http://192.168.0.102:3000/";
+    public String base_url = "http://192.168.178.35:3000/";
 
     public static final String EXTRA_TITLE = "title";
     public static final String EXTRA_TEXT = "text";
